@@ -1,0 +1,1 @@
+delete directories/files in one command: find . -name "acc*" -exec rm -r "{}" \;

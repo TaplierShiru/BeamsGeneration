@@ -1,0 +1,1695 @@
+{
+ "model_info": {
+  "in_x": "Input",
+  "out_x": "classification_head1",
+  "name": "MakiResNet"
+ },
+ "graph_info": [
+  {
+   "name": "Input",
+   "parent_tensor_names": [],
+   "parent_layer_info": {
+    "type": "InputLayer",
+    "params": {
+     "name": "Input",
+     "input_shape": [
+      64,
+      336,
+      336,
+      3
+     ]
+    }
+   }
+  },
+  {
+   "name": "conv1/weights",
+   "parent_tensor_names": [
+    "Input"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "conv1/weights",
+     "shape": [
+      7,
+      7,
+      3,
+      64
+     ],
+     "stride": 2,
+     "padding": "SAME",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "conv1/BatchNorm",
+   "parent_tensor_names": [
+    "conv1/weights"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "conv1/BatchNorm",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "activation",
+   "parent_tensor_names": [
+    "conv1/BatchNorm"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "max_pooling2d",
+   "parent_tensor_names": [
+    "activation"
+   ],
+   "parent_layer_info": {
+    "type": "MaxPoolLayer",
+    "params": {
+     "name": "max_pooling2d",
+     "ksize": [
+      1,
+      3,
+      3,
+      1
+     ],
+     "strides": [
+      1,
+      2,
+      2,
+      1
+     ],
+     "padding": "SAME"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_bn1",
+   "parent_tensor_names": [
+    "max_pooling2d"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage1_unit1_bn1",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_activation_1",
+   "parent_tensor_names": [
+    "stage1_unit1_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage1_unit1_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_zero_pad_1",
+   "parent_tensor_names": [
+    "stage1_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage1_unit1_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_conv1",
+   "parent_tensor_names": [
+    "stage1_unit1_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage1_unit1_conv1",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_bn2",
+   "parent_tensor_names": [
+    "stage1_unit1_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage1_unit1_bn2",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_activation_2",
+   "parent_tensor_names": [
+    "stage1_unit1_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage1_unit1_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_zero_pad_2",
+   "parent_tensor_names": [
+    "stage1_unit1_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage1_unit1_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_conv2",
+   "parent_tensor_names": [
+    "stage1_unit1_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage1_unit1_conv2",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit1_sc/conv",
+   "parent_tensor_names": [
+    "stage1_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage1_unit1_sc/conv",
+     "shape": [
+      1,
+      1,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_0",
+   "parent_tensor_names": [
+    "stage1_unit1_conv2",
+    "stage1_unit1_sc/conv"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_0"
+    }
+   }
+  },
+  {
+   "name": "activation_3",
+   "parent_tensor_names": [
+    "add_0"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_3",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_bn1",
+   "parent_tensor_names": [
+    "activation_3"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage1_unit2_bn1",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_activation_1",
+   "parent_tensor_names": [
+    "stage1_unit2_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage1_unit2_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_zero_pad_1",
+   "parent_tensor_names": [
+    "stage1_unit2_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage1_unit2_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_conv1",
+   "parent_tensor_names": [
+    "stage1_unit2_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage1_unit2_conv1",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_bn2",
+   "parent_tensor_names": [
+    "stage1_unit2_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage1_unit2_bn2",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_activation_2",
+   "parent_tensor_names": [
+    "stage1_unit2_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage1_unit2_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_zero_pad_2",
+   "parent_tensor_names": [
+    "stage1_unit2_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage1_unit2_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage1_unit2_conv2",
+   "parent_tensor_names": [
+    "stage1_unit2_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage1_unit2_conv2",
+     "shape": [
+      3,
+      3,
+      64,
+      64
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_1",
+   "parent_tensor_names": [
+    "stage1_unit2_conv2",
+    "activation_3"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_1"
+    }
+   }
+  },
+  {
+   "name": "activation_6",
+   "parent_tensor_names": [
+    "add_1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_6",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_bn1",
+   "parent_tensor_names": [
+    "activation_6"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage2_unit1_bn1",
+     "D": 64,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_activation_1",
+   "parent_tensor_names": [
+    "stage2_unit1_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage2_unit1_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_zero_pad_1",
+   "parent_tensor_names": [
+    "stage2_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage2_unit1_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_conv1",
+   "parent_tensor_names": [
+    "stage2_unit1_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage2_unit1_conv1",
+     "shape": [
+      3,
+      3,
+      64,
+      128
+     ],
+     "stride": 2,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_bn2",
+   "parent_tensor_names": [
+    "stage2_unit1_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage2_unit1_bn2",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_activation_2",
+   "parent_tensor_names": [
+    "stage2_unit1_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage2_unit1_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_zero_pad_2",
+   "parent_tensor_names": [
+    "stage2_unit1_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage2_unit1_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_conv2",
+   "parent_tensor_names": [
+    "stage2_unit1_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage2_unit1_conv2",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit1_sc/conv",
+   "parent_tensor_names": [
+    "stage2_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage2_unit1_sc/conv",
+     "shape": [
+      1,
+      1,
+      64,
+      128
+     ],
+     "stride": 2,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_2",
+   "parent_tensor_names": [
+    "stage2_unit1_conv2",
+    "stage2_unit1_sc/conv"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_2"
+    }
+   }
+  },
+  {
+   "name": "activation_9",
+   "parent_tensor_names": [
+    "add_2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_9",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_bn1",
+   "parent_tensor_names": [
+    "activation_9"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage2_unit2_bn1",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_activation_1",
+   "parent_tensor_names": [
+    "stage2_unit2_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage2_unit2_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_zero_pad_1",
+   "parent_tensor_names": [
+    "stage2_unit2_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage2_unit2_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_conv1",
+   "parent_tensor_names": [
+    "stage2_unit2_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage2_unit2_conv1",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_bn2",
+   "parent_tensor_names": [
+    "stage2_unit2_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage2_unit2_bn2",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_activation_2",
+   "parent_tensor_names": [
+    "stage2_unit2_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage2_unit2_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_zero_pad_2",
+   "parent_tensor_names": [
+    "stage2_unit2_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage2_unit2_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage2_unit2_conv2",
+   "parent_tensor_names": [
+    "stage2_unit2_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage2_unit2_conv2",
+     "shape": [
+      3,
+      3,
+      128,
+      128
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_3",
+   "parent_tensor_names": [
+    "stage2_unit2_conv2",
+    "activation_9"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_3"
+    }
+   }
+  },
+  {
+   "name": "activation_12",
+   "parent_tensor_names": [
+    "add_3"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_12",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_bn1",
+   "parent_tensor_names": [
+    "activation_12"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage3_unit1_bn1",
+     "D": 128,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_activation_1",
+   "parent_tensor_names": [
+    "stage3_unit1_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage3_unit1_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_zero_pad_1",
+   "parent_tensor_names": [
+    "stage3_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage3_unit1_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_conv1",
+   "parent_tensor_names": [
+    "stage3_unit1_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage3_unit1_conv1",
+     "shape": [
+      3,
+      3,
+      128,
+      256
+     ],
+     "stride": 2,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_bn2",
+   "parent_tensor_names": [
+    "stage3_unit1_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage3_unit1_bn2",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_activation_2",
+   "parent_tensor_names": [
+    "stage3_unit1_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage3_unit1_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_zero_pad_2",
+   "parent_tensor_names": [
+    "stage3_unit1_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage3_unit1_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_conv2",
+   "parent_tensor_names": [
+    "stage3_unit1_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage3_unit1_conv2",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit1_sc/conv",
+   "parent_tensor_names": [
+    "stage3_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage3_unit1_sc/conv",
+     "shape": [
+      1,
+      1,
+      128,
+      256
+     ],
+     "stride": 2,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_4",
+   "parent_tensor_names": [
+    "stage3_unit1_conv2",
+    "stage3_unit1_sc/conv"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_4"
+    }
+   }
+  },
+  {
+   "name": "activation_15",
+   "parent_tensor_names": [
+    "add_4"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_15",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_bn1",
+   "parent_tensor_names": [
+    "activation_15"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage3_unit2_bn1",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_activation_1",
+   "parent_tensor_names": [
+    "stage3_unit2_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage3_unit2_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_zero_pad_1",
+   "parent_tensor_names": [
+    "stage3_unit2_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage3_unit2_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_conv1",
+   "parent_tensor_names": [
+    "stage3_unit2_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage3_unit2_conv1",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_bn2",
+   "parent_tensor_names": [
+    "stage3_unit2_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage3_unit2_bn2",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_activation_2",
+   "parent_tensor_names": [
+    "stage3_unit2_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage3_unit2_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_zero_pad_2",
+   "parent_tensor_names": [
+    "stage3_unit2_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage3_unit2_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage3_unit2_conv2",
+   "parent_tensor_names": [
+    "stage3_unit2_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage3_unit2_conv2",
+     "shape": [
+      3,
+      3,
+      256,
+      256
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_5",
+   "parent_tensor_names": [
+    "stage3_unit2_conv2",
+    "activation_15"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_5"
+    }
+   }
+  },
+  {
+   "name": "activation_18",
+   "parent_tensor_names": [
+    "add_5"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_18",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_bn1",
+   "parent_tensor_names": [
+    "activation_18"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage4_unit1_bn1",
+     "D": 256,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_activation_1",
+   "parent_tensor_names": [
+    "stage4_unit1_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage4_unit1_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_zero_pad_1",
+   "parent_tensor_names": [
+    "stage4_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage4_unit1_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_conv1",
+   "parent_tensor_names": [
+    "stage4_unit1_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage4_unit1_conv1",
+     "shape": [
+      3,
+      3,
+      256,
+      512
+     ],
+     "stride": 2,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_bn2",
+   "parent_tensor_names": [
+    "stage4_unit1_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage4_unit1_bn2",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_activation_2",
+   "parent_tensor_names": [
+    "stage4_unit1_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage4_unit1_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_zero_pad_2",
+   "parent_tensor_names": [
+    "stage4_unit1_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage4_unit1_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_conv2",
+   "parent_tensor_names": [
+    "stage4_unit1_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage4_unit1_conv2",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit1_sc/conv",
+   "parent_tensor_names": [
+    "stage4_unit1_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage4_unit1_sc/conv",
+     "shape": [
+      1,
+      1,
+      256,
+      512
+     ],
+     "stride": 2,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_6",
+   "parent_tensor_names": [
+    "stage4_unit1_conv2",
+    "stage4_unit1_sc/conv"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_6"
+    }
+   }
+  },
+  {
+   "name": "activation_21",
+   "parent_tensor_names": [
+    "add_6"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_21",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_bn1",
+   "parent_tensor_names": [
+    "activation_21"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage4_unit2_bn1",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_activation_1",
+   "parent_tensor_names": [
+    "stage4_unit2_bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage4_unit2_activation_1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_zero_pad_1",
+   "parent_tensor_names": [
+    "stage4_unit2_activation_1"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage4_unit2_zero_pad_1",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_conv1",
+   "parent_tensor_names": [
+    "stage4_unit2_zero_pad_1"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage4_unit2_conv1",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_bn2",
+   "parent_tensor_names": [
+    "stage4_unit2_conv1"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "stage4_unit2_bn2",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_activation_2",
+   "parent_tensor_names": [
+    "stage4_unit2_bn2"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "stage4_unit2_activation_2",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_zero_pad_2",
+   "parent_tensor_names": [
+    "stage4_unit2_activation_2"
+   ],
+   "parent_layer_info": {
+    "type": "ZeroPaddingLayer",
+    "params": {
+     "name": "stage4_unit2_zero_pad_2",
+     "padding": [
+      [
+       1,
+       1
+      ],
+      [
+       1,
+       1
+      ]
+     ]
+    }
+   }
+  },
+  {
+   "name": "stage4_unit2_conv2",
+   "parent_tensor_names": [
+    "stage4_unit2_zero_pad_2"
+   ],
+   "parent_layer_info": {
+    "type": "ConvLayer",
+    "params": {
+     "name": "stage4_unit2_conv2",
+     "shape": [
+      3,
+      3,
+      512,
+      512
+     ],
+     "stride": 1,
+     "padding": "VALID",
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  },
+  {
+   "name": "add_7",
+   "parent_tensor_names": [
+    "stage4_unit2_conv2",
+    "activation_21"
+   ],
+   "parent_layer_info": {
+    "type": "SumLayer",
+    "params": {
+     "name": "add_7"
+    }
+   }
+  },
+  {
+   "name": "activation_24",
+   "parent_tensor_names": [
+    "add_7"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "activation_24",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "bn1",
+   "parent_tensor_names": [
+    "activation_24"
+   ],
+   "parent_layer_info": {
+    "type": "BatchNormLayer",
+    "params": {
+     "name": "bn1",
+     "D": 512,
+     "decay": 0.9,
+     "eps": 0.001,
+     "use_beta": true,
+     "use_gamma": true,
+     "track_running_stats": true
+    }
+   }
+  },
+  {
+   "name": "relu1",
+   "parent_tensor_names": [
+    "bn1"
+   ],
+   "parent_layer_info": {
+    "type": "ActivationLayer",
+    "params": {
+     "name": "relu1",
+     "activation": "relu"
+    }
+   }
+  },
+  {
+   "name": "flat",
+   "parent_tensor_names": [
+    "relu1"
+   ],
+   "parent_layer_info": {
+    "type": "GlobalAvgPoolLayer",
+    "params": {
+     "name": "flat"
+    }
+   }
+  },
+  {
+   "name": "drop_final",
+   "parent_tensor_names": [
+    "flat"
+   ],
+   "parent_layer_info": {
+    "type": "DropoutLayer",
+    "params": {
+     "name": "drop_final",
+     "p_keep": 0.75,
+     "noise_shape": null,
+     "seed": null
+    }
+   }
+  },
+  {
+   "name": "classification_head1",
+   "parent_tensor_names": [
+    "drop_final"
+   ],
+   "parent_layer_info": {
+    "type": "DenseLayer",
+    "params": {
+     "name": "classification_head1",
+     "input_shape": 512,
+     "output_shape": 21,
+     "activation": "None",
+     "use_bias": false,
+     "init_type": "he"
+    }
+   }
+  }
+ ]
+}
