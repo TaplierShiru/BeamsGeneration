@@ -30,7 +30,7 @@ TEST = 'test'
 
 def load_data(
     path_exp_folder, path_to_data='expand_double_modes', 
-    use_saved=False, size_hw=(336, 336), test_div=0.8,
+    use_saved=False, size_hw=(336, 336), test_percent=0.2,
     data_type=CLASSIFICATION, filename_config='config_train_test'):
     """
     Load data with certain params
@@ -80,7 +80,7 @@ def load_data(
             iterator = tqdm(enumerate(path_images))
             for j, single_img_path in iterator:
                 readed_img = cv2.resize(cv2.imread(single_img_path)[..., ::-1], size_hw)
-                if int(size * test_div) > j:
+                if int(size * test_percent) < j:
                     # train
                     Xtrain.append(readed_img)
                     Ytrain.append(label)
@@ -96,7 +96,8 @@ def load_data(
             json.dump(config_data, fp)
     else:
         print("Read data from config file: ", filename_config)
-        folders_path = os.path.join(path_to_data, config_data['train'][0])
+        folders_path = sorted(glob(path_to_data + '/*'), key=lambda x: float(x.split('/')[-1]))
+        print(f'Number of elements total: {len(folders_path)}')
         pred2param = dict([(i, num_a.split('/')[-1]) for i, num_a in enumerate(folders_path)])
         param2pred = dict([(num_a.split('/')[-1], i) for i, num_a in enumerate(folders_path)])
         # train
@@ -104,9 +105,9 @@ def load_data(
         for single_img_path in iterator:
             readed_img = cv2.resize(cv2.imread(os.path.join(path_to_data, single_img_path))[..., ::-1], size_hw)
             if data_type == CLASSIFICATION:
-                label = param2pred[single_img_path.split('/')[1]]
+                label = param2pred[single_img_path.split('/')[-2]]
             elif data_type == REGRESSION:
-                label = float(single_img_path.split('/')[1])
+                label = float(single_img_path.split('/')[-2])
             else:
                 raise TypeError('Wrong type for `data_type`')
 
@@ -118,9 +119,9 @@ def load_data(
         for single_img_path in iterator:
             readed_img = cv2.resize(cv2.imread(os.path.join(path_to_data, single_img_path))[..., ::-1], size_hw)
             if data_type == CLASSIFICATION:
-                label = param2pred[single_img_path.split('/')[1]]
+                label = param2pred[single_img_path.split('/')[-2]]
             elif data_type == REGRESSION:
-                label = float(single_img_path.split('/')[1])
+                label = float(single_img_path.split('/')[-2])
             else:
                 raise TypeError('Wrong type for `data_type`')
 
@@ -130,14 +131,15 @@ def load_data(
 
     print('train : ', len(Ytrain))
     print('test: ', len(Ytest))
-
+    assert len(Xtrain) == len(Ytrain)
+    assert len(Xtest) == len(Ytest)
 
     return Xtrain, Ytrain, Xtest, Ytest, pred2param, config_data
 
 
 def load_data_minor(
     path_exp_folder, foldername2class, path_to_data='expand_double_modes', 
-    size_hw=(336, 336), test_div=0.8, use_saved=False,
+    size_hw=(336, 336), test_percent=0.2, use_saved=False,
     data_type=CLASSIFICATION, filename_config='config_train_test', index_shift=1):
     """
     Load data with certain params
@@ -189,7 +191,7 @@ def load_data_minor(
             iterator = tqdm(enumerate(path_images))
             for j, single_img_path in iterator:
                 readed_img = cv2.resize(cv2.imread(single_img_path)[..., ::-1], size_hw)
-                if int(size * test_div) > j:
+                if int(size * test_percent) < j:
                     # train
                     Xtrain.append(readed_img)
                     Ytrain.append(label)

@@ -16,11 +16,6 @@ from process import img_RGB2LAB_preprocess_np
 from scipy.ndimage.filters import gaussian_filter
 from sklearn.metrics import f1_score, confusion_matrix
 from sklearn.utils import shuffle
-from makizoo.backbones.resnetv1 import ResNet18
-from makizoo.backbones.mobilenetv2 import MobileNetV2_1_4, MobileNetV2_1_0, MobileNetV2_0_75
-from makiflow.layers import *
-from makiflow.models.classificator import Classificator, CETrainer
-from makiflow.generators.classification import cycle_generator
 
 
 WRONG_PREDICTIONS = 100000.0
